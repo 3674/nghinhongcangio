@@ -1,0 +1,6 @@
+{
+  "name": "Số Hóa Di Sản Lễ Hội Nghinh Ông Cần Giờ",
+  "description": "Hồ sơ số hóa và lan tỏa di sản văn hóa Lễ hội Nghinh Ông Cần Giờ - Đề tài nghiên cứu cộng đồng ngư dân Cần Giờ của sinh viên Trần Quang Đức (FPT Polytechnic x IMTA TECH).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
