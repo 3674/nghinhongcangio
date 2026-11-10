@@ -5,8 +5,19 @@ const app = express();
 
 app.use(express.json());
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
+
 // API Health Check
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({
     status: 'ok',
     recordsCount: disanRecords.length,
@@ -15,13 +26,13 @@ app.get('/api/health', (req, res) => {
 });
 
 // API: Get disan records
-app.get('/api/disan', (req, res) => {
+app.get(['/api/disan', '/disan'], (req, res) => {
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
   res.json(disanRecords);
 });
 
 // API: Gemini Q&A with strict grounding
-app.post('/api/gemini/chat', async (req, res) => {
+app.post(['/api/gemini/chat', '/gemini/chat'], async (req, res) => {
   const { question } = req.body || {};
 
   if (!question || typeof question !== 'string') {
