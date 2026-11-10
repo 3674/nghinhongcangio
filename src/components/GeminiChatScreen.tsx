@@ -13,6 +13,7 @@ import {
   Compass,
   ArrowRight
 } from 'lucide-react';
+import { searchDisanArchive, generateVerifiedAnswer } from '../utils/culturalGrounding';
 
 interface Citation {
   ma_tu_lieu: string;
@@ -131,15 +132,16 @@ Bạn muốn tìm hiểu về nghi thức, địa danh hay tri thức bản đ�
 
       setMessages(prev => [...prev, assistantMsg]);
     } catch (err: any) {
-      console.error('Chat error:', err);
-      const errorMsg: Message = {
+      console.warn('Backend API request failed or cold-starting, using verified local grounding:', err);
+      const fallbackResult = generateVerifiedAnswer(query, searchDisanArchive(query));
+      const fallbackMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'assistant',
-        text: 'Hiện tại hệ thống xử lý đang bận hoặc kho tư liệu chưa có thông tin xác thực về nội dung này. Vui lòng thử lại với câu hỏi cụ thể hơn về các bản ghi NG-001 đến NG-015.',
+        text: fallbackResult.answer,
         timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
-        isError: true
+        citations: fallbackResult.citations
       };
-      setMessages(prev => [...prev, errorMsg]);
+      setMessages(prev => [...prev, fallbackMsg]);
     } finally {
       setIsLoading(false);
     }

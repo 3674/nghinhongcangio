@@ -3,7 +3,7 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { disanRecords, processChatQuery } from './src/server/geminiService.ts';
+import { disanRecords, processChatQuery } from './src/server/geminiService';
 
 dotenv.config();
 

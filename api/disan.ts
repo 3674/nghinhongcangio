@@ -1,6 +1,6 @@
-import { disanRecords } from '../src/server/geminiService.ts';
+import { disanData } from '../src/data/disanData';
 
 export default function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-  res.status(200).json(disanRecords);
+  res.status(200).json(disanData);
 }

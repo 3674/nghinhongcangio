@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import initialDisanData from './data/disan.json';
+import { disanData as initialDisanData } from './data/disanData';
 import { DiSanRecord } from './types/disan';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
